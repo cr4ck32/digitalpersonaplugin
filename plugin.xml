@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        id="digitalpersonaplugin" version="0.0.1">
-    <name>DigitalPersonaPlugin</name>
+        id="dpplugin" version="0.0.1">
+    <name>DPPlugin</name>
 
     <description>An Android Cordova plugin that allows users to read from a digital persona device.</description>
     <license>Apache 2.0</license>
@@ -21,7 +21,7 @@
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="DigitalPersonaPlugin">
-                <param name="android-package" value="pt.wingman.entel.plugin.EntelPlugin"/>
+                <param name="android-package" value="pt.wingman.entel.plugin.DPPlugin"/>
             </feature>
         </config-file>
             
@@ -31,7 +31,7 @@
 			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
         </config-file>
             
-        <source-file src="src/android/EntelPlugin.java" target-dir="src/pt/wingman/entel/plugin" />
+        <source-file src="src/android/DPPlugin.java" target-dir="src/pt/wingman/entel/plugin" />
         <source-file src="src/android/definitions/FingerStatus.java" target-dir="src/pt/wingman/entel/plugin/definitions" />
         <source-file src="src/android/definitions/FingerprintError.java" target-dir="src/pt/wingman/entel/plugin/definitions" />
         <source-file src="src/android/definitions/FingerprintMessageType.java" target-dir="src/pt/wingman/entel/plugin/definitions" />
