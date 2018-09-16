@@ -7,7 +7,7 @@
     <description>An Android Cordova plugin that allows users to read from a digital persona device.</description>
     <license>Apache 2.0</license>
 
-    <keywords>cordova,android,morpho</keywords>
+    <keywords>cordova,android,digitalpersona,eikontouch</keywords>
     <repo>https://github.com/jcarraca/digitalpersonaplugin.git</repo>
     <issue>https://github.com/jcarraca/digitalpersonaplugin/issues</issue>
   
@@ -20,7 +20,7 @@
     </js-module>
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="DigitalPersonaPlugin">
+            <feature name="DPPlugin">
                 <param name="android-package" value="pt.wingman.entel.plugin.DPPlugin"/>
             </feature>
         </config-file>
