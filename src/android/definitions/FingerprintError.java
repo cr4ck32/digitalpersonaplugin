@@ -1,4 +1,4 @@
-package pt.wingman.entel.plugin.definitions;
+package pt.deloitte.entel.plugin.definitions;
 
 public @interface FingerprintError {
     int UNEXPECTED = -1;

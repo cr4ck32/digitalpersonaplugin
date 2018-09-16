@@ -1,4 +1,4 @@
-package pt.wingman.entel.plugin.definitions;
+package pt.deloitte.entel.plugin.definitions;
 
 public @interface FingerprintMessageType {
     int FINGER_POSITION = 1;

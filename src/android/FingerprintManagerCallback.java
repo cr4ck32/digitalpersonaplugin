@@ -1,4 +1,4 @@
-package pt.wingman.entel.plugin;
+package pt.deloitte.entel.plugin;
 
 public interface FingerprintManagerCallback {
     void onFingerStatusUpdate(int fingerStatus);

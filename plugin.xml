@@ -21,7 +21,7 @@
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="DPPlugin">
-                <param name="android-package" value="pt.wingman.entel.plugin.DPPlugin"/>
+                <param name="android-package" value="pt.deloitte.entel.plugin.DPPlugin"/>
             </feature>
         </config-file>
             
@@ -31,13 +31,13 @@
 			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
         </config-file>
             
-        <source-file src="src/android/DPPlugin.java" target-dir="src/pt/wingman/entel/plugin" />
-        <source-file src="src/android/definitions/FingerStatus.java" target-dir="src/pt/wingman/entel/plugin/definitions" />
-        <source-file src="src/android/definitions/FingerprintError.java" target-dir="src/pt/wingman/entel/plugin/definitions" />
-        <source-file src="src/android/definitions/FingerprintMessageType.java" target-dir="src/pt/wingman/entel/plugin/definitions" />
-        <source-file src="src/android/definitions/FingerprintStatus.java" target-dir="src/pt/wingman/entel/plugin/definitions" />
-        <source-file src="src/android/FingerprintManager.java" target-dir="src/pt/wingman/entel/plugin" />
-        <source-file src="src/android/FingerprintManagerCallback.java" target-dir="src/pt/wingman/entel/plugin" />
+        <source-file src="src/android/DPPlugin.java" target-dir="src/pt/deloitte/entel/plugin" />
+        <source-file src="src/android/definitions/FingerStatus.java" target-dir="src/pt/deloitte/entel/plugin/definitions" />
+        <source-file src="src/android/definitions/FingerprintError.java" target-dir="src/pt/deloitte/entel/plugin/definitions" />
+        <source-file src="src/android/definitions/FingerprintMessageType.java" target-dir="src/pt/deloitte/entel/plugin/definitions" />
+        <source-file src="src/android/definitions/FingerprintStatus.java" target-dir="src/pt/deloitte/entel/plugin/definitions" />
+        <source-file src="src/android/FingerprintManager.java" target-dir="src/pt/deloitte/entel/plugin" />
+        <source-file src="src/android/FingerprintManagerCallback.java" target-dir="src/pt/deloitte/entel/plugin" />
 
 		<!-- SDK -->
 		<lib-file src="src/android/libs/dpuareu.jar"/>

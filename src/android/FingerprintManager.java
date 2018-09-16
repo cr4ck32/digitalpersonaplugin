@@ -1,4 +1,4 @@
-package pt.wingman.entel.plugin;
+package pt.deloitte.entel.plugin;
 
 import android.app.PendingIntent;
 import android.content.Context;
@@ -36,9 +36,9 @@ import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
-import pt.wingman.entel.plugin.definitions.FingerprintError;
-import pt.wingman.entel.plugin.definitions.FingerprintMessageType;
-import pt.wingman.entel.plugin.definitions.FingerprintStatus;
+import pt.deloitte.entel.plugin.definitions.FingerprintError;
+import pt.deloitte.entel.plugin.definitions.FingerprintMessageType;
+import pt.deloitte.entel.plugin.definitions.FingerprintStatus;
 
 public class FingerprintManager {
     

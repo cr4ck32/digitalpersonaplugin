@@ -1,4 +1,4 @@
-package pt.wingman.entel.plugin;
+package pt.deloitte.entel.plugin;
 
 import android.content.Context;
 import android.widget.Toast;
@@ -10,8 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import pt.wingman.entel.plugin.FingerprintManager;
-import pt.wingman.entel.plugin.FingerprintManagerCallback;
+import pt.deloitte.entel.plugin.FingerprintManager;
+import pt.deloitte.entel.plugin.FingerprintManagerCallback;
 
 public class DPPlugin extends CordovaPlugin {
     @Override
