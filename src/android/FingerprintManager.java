@@ -166,6 +166,7 @@ public class FingerprintManager {
 					m_reset = false;
 					while (!m_reset)
 					{
+						fingerprintManagerCallback.onFingerprintStatusUpdate(FingerprintStatus.SCANNING);
 						Log.d("FingerprintManager","Capturing...");
 						Reader.CaptureResult cap_result = m_reader.Capture(Fid.Format.ANSI_381_2004, Reader.ImageProcessing.IMG_PROC_DEFAULT, 500, -1);
 						if(cap_result != null){
