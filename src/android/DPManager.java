@@ -36,27 +36,27 @@ import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
-import pt.deloitte.entel.plugin.definitions.FingerprintError;
-import pt.deloitte.entel.plugin.definitions.FingerprintMessageType;
-import pt.deloitte.entel.plugin.definitions.FingerprintStatus;
+import pt.deloitte.entel.plugin.definitions.DPError;
+import pt.deloitte.entel.plugin.definitions.DPMessageType;
+import pt.deloitte.entel.plugin.definitions.DPStatus;
 
-public class FingerprintManager {
+public class DPManager {
     
 	private static ReaderCollection m_collection;
 	
 	private static final String ACTION_USB_PERMISSION = "com.digitalpersona.uareu.dpfpddusbhost.USB_PERMISSION";
 	
-    private static FingerprintManager fingerprintManager;
+    private static DPManager DPManager;
 
-    public static synchronized FingerprintManager getInstance() {
-        if (fingerprintManager == null)
-            fingerprintManager = new FingerprintManager();
-        return fingerprintManager;
+    public static synchronized DPManager getInstance() {
+        if (DPManager == null)
+            DPManager = new DPManager();
+        return DPManager;
     }
 
 	private Reader m_reader;
     private Context context;
-    private FingerprintManagerCallback fingerprintManagerCallback;
+    private DPManagerCallback DPManagerCallback;
     
 	private String m_readerName;
 	private boolean m_reset = false;
@@ -78,9 +78,9 @@ public class FingerprintManager {
         }
     };
 
-    public void initialize(Context newContext, FingerprintManagerCallback newFingerPrintManagerCallback) {
+    public void initialize(Context newContext, DPManagerCallback newDPManagerCallback) {
         context = newContext;
-        fingerprintManagerCallback = newFingerPrintManagerCallback;
+        DPManagerCallback = newDPManagerCallback;
 		
 		try {
 			m_collection = UareUGlobal.GetReaderCollection(context);
@@ -93,12 +93,12 @@ public class FingerprintManager {
 				UsbManager usbManager = (UsbManager) context.getSystemService(Context.USB_SERVICE);
 				HashMap<String, UsbDevice> usbDeviceHashMap = usbManager.getDeviceList();
 				if (usbDeviceHashMap.isEmpty()) {
-					fingerprintManagerCallback.onFingerprintStatusUpdate(FingerprintStatus.STOPED);
-					fingerprintManagerCallback.onError(FingerprintError.NO_DEVICE_FOUND);
+					DPManagerCallback.onDPStatusUpdate(DPStatus.STOPED);
+					DPManagerCallback.onError(DPError.NO_DEVICE_FOUND);
 				} else {
 					UsbDevice usbDevice = usbDeviceHashMap.values().iterator().next();
 					if (usbManager.hasPermission(usbDevice)) {
-						fingerprintManagerCallback.onFingerprintStatusUpdate(FingerprintStatus.STARTED);
+						DPManagerCallback.onDPStatusUpdate(DPStatus.STARTED);
 						CheckEikonDevice();
 						readEikonDevice();
 					} else {
@@ -107,13 +107,13 @@ public class FingerprintManager {
 				}
             }
 		} catch (Exception e1) {
-			fingerprintManagerCallback.onBitmapUpdate(0, 0, e1.getMessage());
+			DPManagerCallback.onBitmapUpdate(0, 0, e1.getMessage());
 		}
     }
 	
-	public void initialize2(Context newContext, FingerprintManagerCallback newFingerPrintManagerCallback) {
+	public void initialize2(Context newContext, DPManagerCallback newDPManagerCallback) {
         context = newContext;
-        fingerprintManagerCallback = newFingerPrintManagerCallback;
+        DPManagerCallback = newDPManagerCallback;
 		
 		try {
 			m_collection = UareUGlobal.GetReaderCollection(context);
@@ -126,19 +126,19 @@ public class FingerprintManager {
 				UsbManager usbManager = (UsbManager) context.getSystemService(Context.USB_SERVICE);
 				HashMap<String, UsbDevice> usbDeviceHashMap = usbManager.getDeviceList();
 				if (usbDeviceHashMap.isEmpty()) {
-					fingerprintManagerCallback.onFingerprintStatusUpdate(FingerprintStatus.STOPED);
-					fingerprintManagerCallback.onError(FingerprintError.NO_DEVICE_FOUND);
+					DPManagerCallback.onDPStatusUpdate(DPStatus.STOPED);
+					DPManagerCallback.onError(DPError.NO_DEVICE_FOUND);
 				} else {
 					UsbDevice usbDevice = usbDeviceHashMap.values().iterator().next();
 					if (usbManager.hasPermission(usbDevice)) {
-						fingerprintManagerCallback.onFingerprintStatusUpdate(FingerprintStatus.STARTED);
+						DPManagerCallback.onDPStatusUpdate(DPStatus.STARTED);
 					} else {
 						usbManager.requestPermission(usbDevice, PendingIntent.getBroadcast(context, 0, new Intent(ACTION_USB_PERMISSION), 0));
 					}
 				}
             }
 		} catch (Exception e1) {
-			fingerprintManagerCallback.onBitmapUpdate(0, 0, e1.getMessage());
+			DPManagerCallback.onBitmapUpdate(0, 0, e1.getMessage());
 		}
     }
 	
@@ -148,11 +148,11 @@ public class FingerprintManager {
 			m_reader.Open(Priority.EXCLUSIVE);
 		} 
 		catch (UareUException e){
-			Log.d("FingerprintManager", m_reader.GetDescription().technology + ": " + m_readerName + ": " + e.getMessage());
+			Log.d("DPManager", m_reader.GetDescription().technology + ": " + m_readerName + ": " + e.getMessage());
 		}
 		catch (Exception e1)
 		{
-			Log.d("FingerprintManager", m_reader.GetDescription().technology + ": " + m_readerName + ": " + e1.getMessage());
+			Log.d("DPManager", m_reader.GetDescription().technology + ": " + m_readerName + ": " + e1.getMessage());
 		}
 	}
 	
@@ -166,8 +166,8 @@ public class FingerprintManager {
 					m_reset = false;
 					while (!m_reset)
 					{
-						fingerprintManagerCallback.onFingerprintStatusUpdate(FingerprintStatus.SCANNING);
-						Log.d("FingerprintManager","Capturing...");
+						DPManagerCallback.onDPStatusUpdate(DPStatus.SCANNING);
+						Log.d("DPManager","Capturing...");
 						Reader.CaptureResult cap_result = m_reader.Capture(Fid.Format.ANSI_381_2004, Reader.ImageProcessing.IMG_PROC_DEFAULT, 500, -1);
 						if(cap_result != null){
 							
@@ -176,18 +176,18 @@ public class FingerprintManager {
 							
 							String base64 = encode(rawCompress);
 							
-							fingerprintManagerCallback.onBitmapUpdate(0, 0, base64);
+							DPManagerCallback.onBitmapUpdate(0, 0, base64);
 							
 							if(base64 != "") stop();
 						} else {
-							fingerprintManagerCallback.onFingerprintStatusUpdate(FingerprintStatus.STOPED);
-							fingerprintManagerCallback.onError(FingerprintError.UNEXPECTED);
+							DPManagerCallback.onDPStatusUpdate(DPStatus.STOPED);
+							DPManagerCallback.onError(DPError.UNEXPECTED);
 						}
 					}
 				}catch (Exception e)
 				{	
-					fingerprintManagerCallback.onFingerprintStatusUpdate(FingerprintStatus.STOPED);
-					fingerprintManagerCallback.onError(FingerprintError.UNEXPECTED);
+					DPManagerCallback.onDPStatusUpdate(DPStatus.STOPED);
+					DPManagerCallback.onError(DPError.UNEXPECTED);
 				}
 			}
 		}).start();
@@ -199,12 +199,12 @@ public class FingerprintManager {
 			m_reset = true;
 			try {m_reader.CancelCapture(); } catch (Exception e) {}
 			m_reader.Close();
-			fingerprintManagerCallback.onFingerprintStatusUpdate(FingerprintStatus.STOPED);
+			DPManagerCallback.onDPStatusUpdate(DPStatus.STOPED);
 		}
 		catch (Exception e)
 		{
-			fingerprintManagerCallback.onFingerprintStatusUpdate(FingerprintStatus.STOPED);
-            fingerprintManagerCallback.onError(FingerprintError.UNEXPECTED);
+			DPManagerCallback.onDPStatusUpdate(DPStatus.STOPED);
+            DPManagerCallback.onError(DPError.UNEXPECTED);
 		}
     }
 	

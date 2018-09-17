@@ -1,13 +1,13 @@
 package pt.deloitte.entel.plugin;
 
-public interface FingerprintManagerCallback {
-    void onFingerStatusUpdate(int fingerStatus);
+public interface DPManagerCallback {
+    void onDPFingerStatusUpdate(int DPFingerStatus);
 
     void onBitmapUpdate(int width, int height, String base64String);
 
     void onPercentageUpdate(int percentage);
 
-    void onFingerprintStatusUpdate(int fingerprintStatus);
+    void onDPStatusUpdate(int DPStatus);
 
     void onError(int errorCode);
 

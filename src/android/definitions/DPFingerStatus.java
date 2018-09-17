@@ -1,6 +1,6 @@
 package pt.deloitte.entel.plugin.definitions;
 
-public @interface FingerStatus {
+public @interface DPFingerStatus {
     int UNEXPECTED = -1;
     int NO_FINGER = 0;
     int MOVE_UP = 1;

@@ -1,6 +1,6 @@
 package pt.deloitte.entel.plugin.definitions;
 
-public @interface FingerprintStatus {
+public @interface DPStatus {
     int DISCONNECTED = -1;
 	int CONNECTED = 0;
 	int STARTED = 1;

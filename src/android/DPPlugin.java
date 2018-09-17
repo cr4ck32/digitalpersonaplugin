@@ -10,8 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import pt.deloitte.entel.plugin.FingerprintManager;
-import pt.deloitte.entel.plugin.FingerprintManagerCallback;
+import pt.deloitte.entel.plugin.DPManager;
+import pt.deloitte.entel.plugin.DPManagerCallback;
 
 public class DPPlugin extends CordovaPlugin {
     @Override
@@ -19,7 +19,7 @@ public class DPPlugin extends CordovaPlugin {
         if (action.equals("start")) {
             
 			Context context = cordova.getActivity().getApplicationContext();
-            FingerprintManager.getInstance().initialize(context, getFingerprintManagerCallback(context, callbackContext));
+            DPManager.getInstance().initialize(context, getDPManagerCallback(context, callbackContext));
 
             PluginResult pluginResult = new  PluginResult(PluginResult.Status.NO_RESULT);
             pluginResult.setKeepCallback(true);
@@ -28,7 +28,7 @@ public class DPPlugin extends CordovaPlugin {
         }
 
         if (action.equals("stop")) {
-            FingerprintManager.getInstance().stop();
+            DPManager.getInstance().stop();
             PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
             callbackContext.sendPluginResult(pluginResult);
             return true;
@@ -36,7 +36,7 @@ public class DPPlugin extends CordovaPlugin {
 		
 		if (action.equals("connect")){
 			Context context = cordova.getActivity().getApplicationContext();
-            FingerprintManager.getInstance().initialize2(context, getFingerprintManagerCallback(context, callbackContext));
+            DPManager.getInstance().initialize2(context, getDPManagerCallback(context, callbackContext));
             PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
             callbackContext.sendPluginResult(pluginResult);
             return true;
@@ -48,10 +48,10 @@ public class DPPlugin extends CordovaPlugin {
         return true;
     }
 
-    private FingerprintManagerCallback getFingerprintManagerCallback(Context context, final CallbackContext callbackContext) {
-        return new FingerprintManagerCallback() {
-            public void onFingerStatusUpdate(int fingerStatus) {
-                PluginResult pluginResult = new  PluginResult(PluginResult.Status.OK, "{\"onFingerStatusUpdate\":{\"fingerStatus\":"+fingerStatus+"}}");
+    private DPManagerCallback getDPManagerCallback(Context context, final CallbackContext callbackContext) {
+        return new DPManagerCallback() {
+            public void onDPFingerStatusUpdate(int DPFingerStatus) {
+                PluginResult pluginResult = new  PluginResult(PluginResult.Status.OK, "{\"onDPFingerStatusUpdate\":{\"DPFingerStatus\":"+DPFingerStatus+"}}");
                 pluginResult.setKeepCallback(true);
                 callbackContext.sendPluginResult(pluginResult);
             }
@@ -68,8 +68,8 @@ public class DPPlugin extends CordovaPlugin {
                 callbackContext.sendPluginResult(pluginResult);
             }
 
-            public void onFingerprintStatusUpdate(int fingerprintStatus) {
-                PluginResult pluginResult = new  PluginResult(PluginResult.Status.OK, "{\"onFingerprintStatusUpdate\":{\"fingerprintStatus\":"+fingerprintStatus+"}}");
+            public void onDPStatusUpdate(int DPStatus) {
+                PluginResult pluginResult = new  PluginResult(PluginResult.Status.OK, "{\"onDPStatusUpdate\":{\"DPStatus\":"+DPStatus+"}}");
                 pluginResult.setKeepCallback(true);
                 callbackContext.sendPluginResult(pluginResult);
             }

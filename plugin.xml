@@ -32,12 +32,12 @@
         </config-file>
             
         <source-file src="src/android/DPPlugin.java" target-dir="src/pt/deloitte/entel/plugin" />
-        <source-file src="src/android/definitions/FingerStatus.java" target-dir="src/pt/deloitte/entel/plugin/definitions" />
-        <source-file src="src/android/definitions/FingerprintError.java" target-dir="src/pt/deloitte/entel/plugin/definitions" />
-        <source-file src="src/android/definitions/FingerprintMessageType.java" target-dir="src/pt/deloitte/entel/plugin/definitions" />
-        <source-file src="src/android/definitions/FingerprintStatus.java" target-dir="src/pt/deloitte/entel/plugin/definitions" />
-        <source-file src="src/android/FingerprintManager.java" target-dir="src/pt/deloitte/entel/plugin" />
-        <source-file src="src/android/FingerprintManagerCallback.java" target-dir="src/pt/deloitte/entel/plugin" />
+        <source-file src="src/android/definitions/DPFingerStatus.java" target-dir="src/pt/deloitte/entel/plugin/definitions" />
+        <source-file src="src/android/definitions/DPError.java" target-dir="src/pt/deloitte/entel/plugin/definitions" />
+        <source-file src="src/android/definitions/DPMessageType.java" target-dir="src/pt/deloitte/entel/plugin/definitions" />
+        <source-file src="src/android/definitions/DPStatus.java" target-dir="src/pt/deloitte/entel/plugin/definitions" />
+        <source-file src="src/android/DPManager.java" target-dir="src/pt/deloitte/entel/plugin" />
+        <source-file src="src/android/DPManagerCallback.java" target-dir="src/pt/deloitte/entel/plugin" />
 
 		<!-- SDK -->
 		<lib-file src="src/android/libs/dpuareu.jar"/>
