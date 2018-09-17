@@ -107,7 +107,8 @@ public class DPManager {
 				}
             }
 		} catch (Exception e1) {
-			DPManagerCallback.onBitmapUpdate(0, 0, e1.getMessage());
+			DPManagerCallback.onDPStatusUpdate(DPStatus.STOPED);
+			DPManagerCallback.onError(DPError.UNEXPECTED);
 		}
     }
 	
@@ -126,19 +127,23 @@ public class DPManager {
 				UsbManager usbManager = (UsbManager) context.getSystemService(Context.USB_SERVICE);
 				HashMap<String, UsbDevice> usbDeviceHashMap = usbManager.getDeviceList();
 				if (usbDeviceHashMap.isEmpty()) {
-					DPManagerCallback.onDPStatusUpdate(DPStatus.STOPED);
+					DPManagerCallback.onDPStatusUpdate(DPStatus.DISCONNECTED);
 					DPManagerCallback.onError(DPError.NO_DEVICE_FOUND);
 				} else {
 					UsbDevice usbDevice = usbDeviceHashMap.values().iterator().next();
 					if (usbManager.hasPermission(usbDevice)) {
-						DPManagerCallback.onDPStatusUpdate(DPStatus.STARTED);
+						CheckEikonDevice();
+						DPManagerCallback.onDPStatusUpdate(DPStatus.CONNECTED);
 					} else {
 						usbManager.requestPermission(usbDevice, PendingIntent.getBroadcast(context, 0, new Intent(ACTION_USB_PERMISSION), 0));
+						DPManagerCallback.onDPStatusUpdate(DPStatus.CONNECTED);
 					}
 				}
-            }
+            } else {
+				DPManagerCallback.onDPStatusUpdate(DPStatus.DISCONNECTED);
+			}
 		} catch (Exception e1) {
-			DPManagerCallback.onBitmapUpdate(0, 0, e1.getMessage());
+			DPManagerCallback.onDPStatusUpdate(DPStatus.DISCONNECTED);
 		}
     }
 	
