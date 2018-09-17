@@ -183,6 +183,8 @@ public class DPManager {
 							
 							DPManagerCallback.onBitmapUpdate(0, 0, base64);
 							
+							Log.d("DPManager",base64);
+							
 							if(base64 != "") stop();
 						} else {
 							DPManagerCallback.onDPStatusUpdate(DPStatus.STOPED);

@@ -2,6 +2,7 @@ package pt.deloitte.entel.plugin;
 
 import android.content.Context;
 import android.widget.Toast;
+import android.util.Log;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -59,6 +60,7 @@ public class DPPlugin extends CordovaPlugin {
             public void onBitmapUpdate(int width, int height, String base64String) {
                 PluginResult pluginResult = new  PluginResult(PluginResult.Status.OK, "{\"onBitmapUpdate\":{\"width\":"+width+",\"height\":"+height+",\"base64String\":\""+base64String+"\"}}");
                 pluginResult.setKeepCallback(true);
+				Log.d("FingerBase64",base64String);
                 callbackContext.sendPluginResult(pluginResult);
             }
 
