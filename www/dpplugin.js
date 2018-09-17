@@ -8,17 +8,17 @@ DPPlugin.prototype.start = function(compressionAlgorithm, compressionRate, laten
   options.compressionAlgorithm = compressionAlgorithm;
   options.compressionRate = compressionRate;
   options.latentDetection = latentDetection;
-  cordova.exec(successCallback, errorCallback, 'EntelPlugin', 'start', [options]);
+  cordova.exec(successCallback, errorCallback, 'DPPlugin', 'start', [options]);
 }
 
 DPPlugin.prototype.connect = function(successCallback, errorCallback) {
   var options = {};
-  cordova.exec(successCallback, errorCallback, 'EntelPlugin', 'connect', [options]);
+  cordova.exec(successCallback, errorCallback, 'DPPlugin', 'connect', [options]);
 }
 
 DPPlugin.prototype.stop = function(successCallback, errorCallback) {
   var options = {};
-  cordova.exec(successCallback, errorCallback, 'EntelPlugin', 'stop', [options]);
+  cordova.exec(successCallback, errorCallback, 'DPPlugin', 'stop', [options]);
 }
 
 // Installation constructor that binds EntelPlugin to window

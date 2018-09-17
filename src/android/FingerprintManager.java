@@ -110,9 +110,7 @@ public class FingerprintManager {
 						usbManager.requestPermission(usbDevice, PendingIntent.getBroadcast(context, 0, new Intent(ACTION_USB_PERMISSION), 0));
 					}
 				}
-            } else {
-				fingerprintManagerCallback.onBitmapUpdate(0, 0, "ERROR");
-			}
+            }
 		} catch (Exception e1) {
 			fingerprintManagerCallback.onBitmapUpdate(0, 0, e1.getMessage());
 		}
@@ -121,16 +119,14 @@ public class FingerprintManager {
 	private void CheckEikonDevice()
 	{
 		try {
-			Log.d("FingerprintManager","BEFORE OPEN");
 			m_reader.Open(Priority.EXCLUSIVE);
-			Log.d("FingerprintManager","AFTER OPEN");
 		} 
 		catch (UareUException e){
-			Log.d("FingerprintManager:EXCEPTION", m_reader.GetDescription().technology + ": " + m_readerName + ": " + e.getMessage());
+			Log.d("FingerprintManager", m_reader.GetDescription().technology + ": " + m_readerName + ": " + e.getMessage());
 		}
 		catch (Exception e1)
 		{
-			Log.d("FingerprintManager:EXCEPTION", m_reader.GetDescription().technology + ": " + m_readerName);
+			Log.d("FingerprintManager", m_reader.GetDescription().technology + ": " + m_readerName + ": " + e.getMessage());
 		}
 	}
 	
@@ -144,7 +140,7 @@ public class FingerprintManager {
 					m_reset = false;
 					while (!m_reset)
 					{
-						Log.d("FingerprintManager","BEFORE READ");
+						Log.d("FingerprintManager","Capturing...");
 						Reader.CaptureResult cap_result = m_reader.Capture(Fid.Format.ANSI_381_2004, Reader.ImageProcessing.IMG_PROC_DEFAULT, 500, -1);
 						if(cap_result != null){
 							
@@ -157,9 +153,9 @@ public class FingerprintManager {
 							
 							if(base64 != "") stop();
 						} else {
-							fingerprintManagerCallback.onBitmapUpdate(0, 0, "CAP_NULL");
+							fingerprintManagerCallback.onFingerprintStatusUpdate(FingerprintStatus.STOPED);
+							fingerprintManagerCallback.onError(FingerprintError.UNEXPECTED);
 						}
-						Log.d("FingerprintManager","AFTER READ");
 					}
 				}catch (Exception e)
 				{	
