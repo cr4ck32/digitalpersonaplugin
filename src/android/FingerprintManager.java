@@ -116,6 +116,37 @@ public class FingerprintManager {
 		}
     }
 	
+	public void initialize2(Context newContext, FingerprintManagerCallback newFingerPrintManagerCallback) {
+        context = newContext;
+        fingerprintManagerCallback = newFingerPrintManagerCallback;
+		
+		try {
+			m_collection = UareUGlobal.GetReaderCollection(context);
+			m_collection.GetReaders();
+			m_reader = m_collection.get(0);
+			m_readerName = m_reader.GetDescription().name;
+			IntentFilter filter = new IntentFilter(ACTION_USB_PERMISSION);
+			context.registerReceiver(mUsbReceiver, filter);
+            if (DPFPDDUsbHost.DPFPDDUsbCheckAndRequestPermissions(context, PendingIntent.getBroadcast(context, 0, new Intent(ACTION_USB_PERMISSION), 0), m_readerName)) {
+				UsbManager usbManager = (UsbManager) context.getSystemService(Context.USB_SERVICE);
+				HashMap<String, UsbDevice> usbDeviceHashMap = usbManager.getDeviceList();
+				if (usbDeviceHashMap.isEmpty()) {
+					fingerprintManagerCallback.onFingerprintStatusUpdate(FingerprintStatus.STOPED);
+					fingerprintManagerCallback.onError(FingerprintError.NO_DEVICE_FOUND);
+				} else {
+					UsbDevice usbDevice = usbDeviceHashMap.values().iterator().next();
+					if (usbManager.hasPermission(usbDevice)) {
+						fingerprintManagerCallback.onFingerprintStatusUpdate(FingerprintStatus.STARTED);
+					} else {
+						usbManager.requestPermission(usbDevice, PendingIntent.getBroadcast(context, 0, new Intent(ACTION_USB_PERMISSION), 0));
+					}
+				}
+            }
+		} catch (Exception e1) {
+			fingerprintManagerCallback.onBitmapUpdate(0, 0, e1.getMessage());
+		}
+    }
+	
 	private void CheckEikonDevice()
 	{
 		try {
@@ -126,7 +157,7 @@ public class FingerprintManager {
 		}
 		catch (Exception e1)
 		{
-			Log.d("FingerprintManager", m_reader.GetDescription().technology + ": " + m_readerName + ": " + e.getMessage());
+			Log.d("FingerprintManager", m_reader.GetDescription().technology + ": " + m_readerName + ": " + e1.getMessage());
 		}
 	}
 	

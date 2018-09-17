@@ -48,6 +48,14 @@ public class DPPlugin extends CordovaPlugin {
             return true;
         }
 		
+		if (action.equals("connect")){
+			Context context = cordova.getActivity().getApplicationContext();
+            FingerprintManager.getInstance().initialize2(context, getFingerprintManagerCallback(context, callbackContext));
+            PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
+            callbackContext.sendPluginResult(pluginResult);
+            return true;
+        }
+		
 
         PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
         callbackContext.sendPluginResult(pluginResult);
