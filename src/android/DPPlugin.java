@@ -17,23 +17,9 @@ public class DPPlugin extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) {
         if (action.equals("start")) {
-            int compressionAlgorithm;
-            int compressionRate;
-            boolean latentDetection;
             
-            try {
-                JSONObject jsonObject = args.getJSONObject(0);
-                compressionAlgorithm = jsonObject.getInt("compressionAlgorithm");
-                compressionRate = jsonObject.getInt("compressionRate");
-                latentDetection = jsonObject.getBoolean("latentDetection");
-            } catch (JSONException e) {
-                PluginResult pluginResult = new  PluginResult(PluginResult.Status.JSON_EXCEPTION);
-                callbackContext.error(e.getMessage());
-                return false;
-            }
-         
-            Context context = cordova.getActivity().getApplicationContext();
-            FingerprintManager.getInstance().initialize(context, getFingerprintManagerCallback(context, callbackContext), compressionAlgorithm, compressionRate, latentDetection);
+			Context context = cordova.getActivity().getApplicationContext();
+            FingerprintManager.getInstance().initialize(context, getFingerprintManagerCallback(context, callbackContext));
 
             PluginResult pluginResult = new  PluginResult(PluginResult.Status.NO_RESULT);
             pluginResult.setKeepCallback(true);

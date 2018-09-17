@@ -57,9 +57,7 @@ public class FingerprintManager {
 	private Reader m_reader;
     private Context context;
     private FingerprintManagerCallback fingerprintManagerCallback;
-    private int compressionAlgorithmValue;
-    private int compressionRate;
-    private boolean isLatentDetection;
+    
 	private String m_readerName;
 	private boolean m_reset = false;
 	
@@ -80,12 +78,9 @@ public class FingerprintManager {
         }
     };
 
-    public void initialize(Context newContext, FingerprintManagerCallback newFingerPrintManagerCallback, int newCompressionAlgorithmValue, int newCompressionRate, boolean newLatentDetection) {
+    public void initialize(Context newContext, FingerprintManagerCallback newFingerPrintManagerCallback) {
         context = newContext;
         fingerprintManagerCallback = newFingerPrintManagerCallback;
-        compressionAlgorithmValue = newCompressionAlgorithmValue;
-        compressionRate = newCompressionRate;
-        isLatentDetection = newLatentDetection;
 		
 		try {
 			m_collection = UareUGlobal.GetReaderCollection(context);
