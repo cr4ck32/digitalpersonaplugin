@@ -3,11 +3,8 @@ function DPPlugin() {}
 
 // The function that passes work along to native shells
 // Message is a string, duration may be 'long' or 'short'
-DPPlugin.prototype.start = function(compressionAlgorithm, compressionRate, latentDetection, successCallback, errorCallback) {
+DPPlugin.prototype.start = function(successCallback, errorCallback) {
   var options = {};
-  options.compressionAlgorithm = compressionAlgorithm;
-  options.compressionRate = compressionRate;
-  options.latentDetection = latentDetection;
   cordova.exec(successCallback, errorCallback, 'DPPlugin', 'start', [options]);
 }
 

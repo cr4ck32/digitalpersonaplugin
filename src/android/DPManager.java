@@ -175,11 +175,12 @@ public class DPManager {
 						Log.d("DPManager","Capturing...");
 						Reader.CaptureResult cap_result = m_reader.Capture(Fid.Format.ANSI_381_2004, Reader.ImageProcessing.IMG_PROC_DEFAULT, 500, -1);
 						if(cap_result != null){
-							
+							Log.d("DPManager","Captured not null");
 							Fid ISOFid = cap_result.image;
 							byte[] rawCompress = processImage(ISOFid.getViews()[0].getData(),ISOFid.getViews()[0].getWidth(), ISOFid.getViews()[0].getHeight());
 							
 							String base64 = encode(rawCompress);
+							Log.d("DPManager",base64);
 							
 							DPManagerCallback.onBitmapUpdate(0, 0, base64);
 							
