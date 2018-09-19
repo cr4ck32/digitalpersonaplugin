@@ -97,6 +97,7 @@ public class DPManager {
 					DPManagerCallback.onError(DPError.NO_DEVICE_FOUND);
 				} else {
 					UsbDevice usbDevice = usbDeviceHashMap.values().iterator().next();
+					if(usbDevice.getVendorId() != 5246) return;
 					if (usbManager.hasPermission(usbDevice)) {
 						DPManagerCallback.onDPStatusUpdate(DPStatus.STARTED);
 						CheckEikonDevice();
@@ -131,6 +132,7 @@ public class DPManager {
 					DPManagerCallback.onError(DPError.NO_DEVICE_FOUND);
 				} else {
 					UsbDevice usbDevice = usbDeviceHashMap.values().iterator().next();
+					if(usbDevice.getVendorId() != 5246) return;
 					if (usbManager.hasPermission(usbDevice)) {
 						CheckEikonDevice();
 						DPManagerCallback.onDPStatusUpdate(DPStatus.CONNECTED);
